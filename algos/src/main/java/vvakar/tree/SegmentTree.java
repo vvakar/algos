@@ -27,8 +27,8 @@ public class SegmentTree {
 
 	public int query(int l, int rExcl) {
 		int total = op.ZERO;
-		l += n; rExcl += n;
-		for(;l < rExcl; l >>= 1, rExcl >>= 1) {
+
+		for(l += n, rExcl += n; l < rExcl; l >>= 1, rExcl >>= 1) {
 			if((l & 1) == 1) total = op.apply(total, stree[l++]);
 			if((rExcl & 1) == 1) total = op.apply(total, stree[--rExcl]);
 		}
@@ -59,22 +59,16 @@ public class SegmentTree {
 
 	public final static Op SUM = new Op(0) {
 		@Override
-		int apply(int a, int b) {
-			return a + b;
-		}
+		int apply(int a, int b) { return a + b; }
 	};
 
 	public final static Op MAX = new Op(Integer.MIN_VALUE) {
 		@Override
-		int apply(int a, int b) {
-			return Math.max(a,b);
-		}
+		int apply(int a, int b) { return Math.max(a,b); }
 	};
 
 	public final static Op MIN = new Op(Integer.MAX_VALUE) {
 		@Override
-		int apply(int a, int b) {
-			return Math.min(a,b);
-		}
+		int apply(int a, int b) { return Math.min(a,b); }
 	};
 }
