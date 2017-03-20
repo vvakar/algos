@@ -12,19 +12,24 @@ public class FenwickTree {
 		int n = xs.length;
 		ftree = new int[n+1];
 
+		// initialize
 		for(int i = 1; i <= n; ++i)
 			update(i, xs[i-1]);
 	}
 
 	public void update(int i, int val) {
-		for(;i < ftree.length; i += (i & -i))
+		for(;i < ftree.length; i += lsb(i))
 			ftree[i] += val;
 	}
 
 	public int query(int i) {
 		int total = 0;
-		for(; i > 0; i -= i & -i)
+		for(; i > 0; i -= lsb(i))
 			total += ftree[i];
 		return total;
+	}
+
+	private static int lsb(int i) {
+		return i & -i;
 	}
 }
