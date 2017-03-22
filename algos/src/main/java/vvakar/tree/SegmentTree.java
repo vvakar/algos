@@ -6,9 +6,9 @@ import java.util.Arrays;
  * Segment tree inspired by http://codeforces.com/blog/entry/18051
  */
 public class SegmentTree {
-	final int n; // nearest gt or e power of two
-	final int[] stree; // 1-based balanced tree representation
-	final Op op;
+	private final int n; // nearest power of two >= size of original array
+	private final int[] stree; // 1-based balanced tree representation
+	private final Op op; // min, max, sum, etc
 
 	public SegmentTree(int[] arr, Op op) {
 		this.op = op;
